@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Último que toque | Tu portal web futbolero de confianza</title>
+	<!--fonts-->
+		<link href='http://fonts.googleapis.com/css?family=Francois+One' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Cabin:400,500,600,700' rel='stylesheet' type='text/css'>	
+	   <link href='http://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet' type='text/css'>		
+	<!--//fonts-->		
+		<link href="/static/css/index/bootstrap.css" th:href="@{/css/index/bootstrap.css}" rel="stylesheet" type="text/css" media="all" />
+		<link href="/static/css/index/style.css" th:href="@{/css/index/style.css}" rel="stylesheet" type="text/css" media="all" />
+	<!-- for-mobile-apps -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="soccer Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+		Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<!-- //for-mobile-apps -->
+	<!-- js -->
+		<script src="/static/js/index/jquery.min.js" th:src="@{/js/index/jquery.min.js}"></script>
+	<!-- js -->
+</head>
+<script>
+
+        function confirmDelete(ruta){
+            $('#confirmDelete').modal();
+            $("#aceptar").val(ruta);
+        }
+
+        function confirmar(){
+            var ruta = $("#aceptar").val();
+            window.location = ruta;
+        }
+     
+</script>
+<body>
+<!-- header -->
+<div class="header">
+	 <div class="container">
+		 <div class="logo">
+			<a href="index.html"><img class="imagen" src="/static/img/logoweb.png" th:src="@{/img/logoweb.png}" /></a>
+		</div>
+		 <div class="top-menu">
+			 <span class="menu"></span>
+			  <ul>
+				 <li class="active"><a href="index.html">HOME</a></li>
+				 <li><a href="about.html">ABOUT US</a></li>
+				 <li><a href="gallery.html">GALLERY</a></li>
+				 <li><a href="404.html">TRAINING</a></li>
+				 <li><a href="event.html">NEWS & EVENTS</a></li>
+				 <li><a href="contact.html">CONTACT</a></li>
+			 </ul>			 
+		 </div>			
+		 <!-- script-for-menu -->
+		 <script>
+				$("span.menu").click(function(){
+					$(".top-menu ul").slideToggle("slow" , function(){
+					});
+				});
+		 </script>
+		 <!-- script-for-menu -->	  	
+
+		 <div class="clearfix"></div>
+	 </div>
+</div>
+<!-- //header -->
+<!-- banner -->
+<div class="strip">
+	 <div class="container">
+	 <marquee behavior="scroll" direction="left">Aquí van a ir los últimos resultados</marquee>   
+		<div class="clearfix"></div>
+		</div>
+</div>
+				
+
+<!-- content -->
+<br>
+<div class="content">
+<div class="container">
+<table class="table">
+  <thead class="thead-dark">
+  <tbody>
+    <tr th:each= "us: ${users}">
+      <th scope="row" th:text="${us.username}"></th>
+	  <td>                  
+		<a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-danger" th:onclick="|confirmDelete('/deleteUser?id=${us.id}')|">
+			<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+				<path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+			</svg>
+        </a>
+	  </td>
+	  <td>
+	  <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-warning" th:href="@{/updateUser(id=${us.id})}">
+			<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+				<path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+			</svg>
+        </a>
+	  
+	  </td>      
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<!--- //content--->
+<br>
+<br>
+<!--footer-->
+<div class="footer">
+	 <div class="container">
+		 <div class="copywrite">
+			 <p>© 2015 All Rights Reseverd Design by <a href="http://w3layouts.com/">W3layouts</a> </p>
+		 </div>
+		 <div class="footer-menu">
+			 <ul>
+				 <li><a href="index.html">HOME</a></li>
+				 <li><a href="index.html">ABOUT US</a></li>
+				 <li><a href="index.html">GALLERY</a></li>
+				 <li><a href="index.html">TRAINING</a></li>
+				 <li><a href="index.html">NEWS & EVENTS</a></li>
+				 <li><a href="index.html">CONTACT</a></li>
+			 </ul>
+		 </div>
+		 <div class="clearfix"></div>
+	 </div>
+</div>
+<!-- //footer -->
+<!-- Modal Eliminar -->
+<div class="modal align-self-center" tabindex="-1" id="confirmDelete">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title text-danger text-justify">¿Estás seguro de eliminar este usuario?</h5>
+              </div>
+              <div class="modal-body text-justify">
+                <p>Esta acción no se podrá deshacer</p>
+              </div>
+              <div class="modal-footer text-center col">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-outline-danger" id="aceptar" onclick="confirmar()">Eliminar</button>
+              </div>
+            </div>
+          </div>
+</div>
+<!-- //Modal Eliminar -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+</body>
+</html>

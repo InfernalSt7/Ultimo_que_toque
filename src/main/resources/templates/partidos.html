@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Último que toque | Tu portal web futbolero de confianza</title>
+	<!--fonts-->
+		<link href='http://fonts.googleapis.com/css?family=Francois+One' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Cabin:400,500,600,700' rel='stylesheet' type='text/css'>	
+	   <link href='http://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet' type='text/css'>		
+	<!--//fonts-->		
+		<link href="/static/css/index/bootstrap.css" th:href="@{/css/index/bootstrap.css}" rel="stylesheet" type="text/css" media="all" />
+		<link href="/static/css/index/style.css" th:href="@{/css/index/style.css}" rel="stylesheet" type="text/css" media="all" />
+	<!-- for-mobile-apps -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="soccer Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+		Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<!-- //for-mobile-apps -->
+	<!-- js -->
+		<script src="/static/js/index/jquery.min.js" th:src="@{/js/index/jquery.min.js}"></script>
+	<!-- js -->
+</head>
+<body>
+<!-- header -->
+<div class="header">
+	 <div class="container">
+		 <div class="logo">
+			   <h1><a href="index.html">SOCCER</a></h1>
+		 </div>	
+		 <div class="top-menu">
+			 <span class="menu"></span>
+			  <ul>
+				 <li class="active"><a th:href="@{/perfil}">PERFIL</a></li>
+				 <li><a th:href="@{/login?logout}">CERRAR SESIÓN</a></li>
+			 </ul>			 
+		 </div>			
+		 <!-- script-for-menu -->
+		 <script>
+				$("span.menu").click(function(){
+					$(".top-menu ul").slideToggle("slow" , function(){
+					});
+				});
+		 </script>
+		 <!-- script-for-menu -->	  	
+
+		 <div class="clearfix"></div>
+	 </div>
+</div>
+<!-- //header -->
+<!-- banner -->
+<div class="strip">
+	 <div class="container">
+	 <marquee behavior="scroll" direction="left">Aquí van a ir los últimos resultados</marquee>   
+		</div>
+</div>
+<section class="breadcrumb-section set-bg" data-setbg="">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="bs-text">
+                        <h2>Resultados</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Results Section Begin -->
+    <section class="schedule-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 left-blog-pad">
+                    <div class="schedule-text">
+                        <div class="st-table">
+                        <table class="table">
+  							<tbody>
+    							<tr  th:each="p : ${resultados}">
+      							<td class="left-team">
+      								<span type="text" th:value="${p.equipo_local.id}" name="local"></span>
+                                	<img class="icon" th:src="${p.equipo_local.foto}" alt=""> 
+                                    <h4 th:text="${p.equipo_local.nombre}"></h4>  
+                                </td>
+      							<td class="st-option">
+	                                <div class="so-text">
+	                                <h4 th:text="${p.resultado}"></h4>
+	                                </div>
+                                </td>
+      							<td class="right-team">
+      								<span type="text" th:value="${p.equipo_visitante.id}" name="visitante"></span>
+                                	<img class="icon" th:src="${p.equipo_visitante.foto}" alt=""> 
+                                    <h4 th:text="${p.equipo_visitante.nombre}"></h4>           
+                                </td>
+							    </tr>
+							  </tbody>
+							</table>                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/addPartidos}" class="btn btn-success btn-lg btn-block">
+			<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+		  		<path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+			</svg>
+		</a>
+    </section>
+    
+<!--footer-->
+<div class="footer">
+	 <div class="container">
+		 <div class="copywrite">
+			 <p>© 2015 All Rights Reseverd Design by <a href="http://w3layouts.com/">W3layouts</a> </p>
+		 </div>
+		 <div class="footer-menu">
+			 <ul>
+				 <li><a href="index.html">HOME</a></li>
+				 <li><a href="index.html">ABOUT US</a></li>
+				 <li><a href="index.html">GALLERY</a></li>
+				 <li><a href="index.html">TRAINING</a></li>
+				 <li><a href="index.html">NEWS & EVENTS</a></li>
+				 <li><a href="index.html">CONTACT</a></li>
+			 </ul>
+		 </div>
+		 <div class="clearfix"></div>
+	 </div>
+</div>
+<!-- //footer -->
+</body>
+</html>

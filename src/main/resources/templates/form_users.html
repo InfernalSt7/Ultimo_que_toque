@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Último que toque | Tu portal web futbolero de confianza</title>
+	<!--fonts-->
+		<link href='http://fonts.googleapis.com/css?family=Francois+One' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Cabin:400,500,600,700' rel='stylesheet' type='text/css'>	
+	   <link href='http://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet' type='text/css'>		
+	   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+	<!--//fonts-->		
+		<link href="/static/css/index/bootstrap.css" th:href="@{/css/index/bootstrap.css}" rel="stylesheet" type="text/css" media="all" />
+		<link href="/static/css/index/style.css" th:href="@{/css/index/style.css}" rel="stylesheet" type="text/css" media="all" />
+	<!-- for-mobile-apps -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="soccer Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+		Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<!-- //for-mobile-apps -->
+	<!-- js -->
+		<script src="/static/js/index/jquery.min.js" th:src="@{/js/index/jquery.min.js}"></script>
+	<!-- js -->
+</head>
+<body>
+<!-- header -->
+<div class="header">
+	 <div class="container">
+		 <div class="logo">
+			   <h1><a href="index.html">SOCCER</a></h1>
+		 </div>	
+		 <div class="top-menu">
+			 <span class="menu"></span>
+			  <ul>
+				 <li class="active"><a href="index.html">HOME</a></li>
+				 <li><a href="about.html">ABOUT US</a></li>
+				 <li><a href="gallery.html">GALLERY</a></li>
+				 <li><a href="404.html">TRAINING</a></li>
+				 <li><a href="event.html">NEWS & EVENTS</a></li>
+				 <li><a href="contact.html">CONTACT</a></li>
+			 </ul>			 
+		 </div>			
+		 <!-- script-for-menu -->
+		 <script>
+				$("span.menu").click(function(){
+					$(".top-menu ul").slideToggle("slow" , function(){
+					});
+				});
+		 </script>
+		 <!-- script-for-menu -->	  	
+
+		 <div class="clearfix"></div>
+	 </div>
+</div>
+<!-- //header -->
+<!-- banner -->
+<div class="strip">
+	 <div class="container">
+	 <marquee behavior="scroll" direction="left">Aquí van a ir los últimos resultados</marquee>   
+		<div class="clearfix"></div>
+		</div>
+</div>
+<style>
+body {font-family: "Lato", sans-serif}
+.mySlides {display: none}
+</style>
+<body>
+
+	<form th:action="@{/addUser}" action="#" method="post" th:object="${user}" enctype="multipart/form-data">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		<input type="hidden" th:field="*{id}"/>
+		<p>Nombre: <input class="form-control" type="text" th:field="*{nombre}" th:value="${nombre}"/> </p>
+		<p> Apellidos: <input class="form-control" type="text" th:field="*{apellidos}" th:value="${apellidos}"/></p>
+		<p> Email: <input class="form-control" type="text" th:field="*{email}" th:value="${email}"/></p>
+		<p> Nombre de Usuario: <input class="form-control" type="text" th:field="*{username}" th:value="${username}"/></p>
+		<p> Contraseña: <input class="form-control" type="password" th:field="*{password}" th:value="${password}"/></p>
+		<input  type="hidden" th:field="*{enabled}" th:value="1"/> 
+		<input sec:authorize="hasRole('ROLE_USUARIO')" type="hidden" th:value="ROLE_USUARIO" name="role"/>
+		<input sec:authorize="hasRole('ROLE_MOD')" type="hidden" th:value="ROLE_MOD" name="role"/>
+        <label sec:authorize="hasRole('ROLE_ADMIN')">Rol: </label>
+         <select class="form-control" name="role" sec:authorize="hasRole('ROLE_ADMIN')">
+            <option th:value="ROLE_USUARIO">USUARIO</option>
+            <option th:value="ROLE_ADMIN">ADMIN</option>
+            <option th:value="ROLE_MOD">MOD</option>
+        </select>
+		
+		<p> <input class="form-control" type="submit" value="submit"> </p>
+	</form>
+</body>
+<!--footer-->
+<div class="footer">
+	 <div class="container">
+		 <div class="copywrite">
+			 <p>© 2015 All Rights Reseverd Design by <a href="http://w3layouts.com/">W3layouts</a> </p>
+		 </div>
+		 <div class="footer-menu">
+			 <ul>
+				 <li><a href="index.html">HOME</a></li>
+				 <li><a href="index.html">ABOUT US</a></li>
+				 <li><a href="index.html">GALLERY</a></li>
+				 <li><a href="index.html">TRAINING</a></li>
+				 <li><a href="index.html">NEWS & EVENTS</a></li>
+				 <li><a href="index.html">CONTACT</a></li>
+			 </ul>
+		 </div>
+		 <div class="clearfix"></div>
+	 </div>
+</div>
+<!-- //footer -->
+</html>
