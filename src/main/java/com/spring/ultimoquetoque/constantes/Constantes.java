@@ -18,6 +18,7 @@ public class Constantes {
 	
 	public static final String ENTRENADOR_VIEW="entrenador";
 	public static final String FORMENTRENADOR_VIEW="form_entrenador";
+	public static final String UPDATEENTRENADOR_VIEW = "update_entrenador";
 	
 	public static final String PERFIL_VIEW="perfil";
 	public static final String REGISTER_VIEW="registro";

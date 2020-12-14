@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.spring.ultimoquetoque.constantes.Constantes;
 import com.spring.ultimoquetoque.model.JugadorModel;
 import com.spring.ultimoquetoque.model.UserModel;
+import com.spring.ultimoquetoque.service.JuegaService;
 import com.spring.ultimoquetoque.service.UserService;
 
 @Controller
@@ -28,6 +29,10 @@ private static final Log LOG=LogFactory.getLog(PerfilController.class);
 	@Autowired
 	@Qualifier("userServiceImpl")
 	private UserService userService;
+	
+	@Autowired
+	@Qualifier("juegaServiceImpl")
+	private JuegaService juegaService;
 
 	@GetMapping("/perfil")
 	public ModelAndView perfil(Authentication auth, UserModel userModel) {
@@ -40,6 +45,7 @@ private static final Log LOG=LogFactory.getLog(PerfilController.class);
                 
             }
         }
+		mav.addObject("resultados",juegaService.listResultados());
 		mav.addObject("user", userModel);
 		return mav;
 	}

@@ -1,185 +1,77 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
 	<title>Login V1</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="/static/img/icons/favicon.ico" th:href="@{/img/icons/favicon.ico}"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/static/vendor/bootstrap/css/bootstrap.min.css" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/static/fonts/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/static/vendor/animate/animate.css" th:href="@{/vendor/animate/animate.css}">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="/static/vendor/css-hamburgers/hamburgers.min.css" th:href="@{/vendor/css-hamburgers/hamburgers.min.css}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/static/vendor/select2/select2.min.css" th:href="@{/vendor/select2/select2.min.css}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/static/css/util.css" th:href="@{/css/util.css}">
-	<link rel="stylesheet" type="text/css" href="/static/css/main.css" th:href="@{/css/main.css}">
-<!--===============================================================================================-->
-</head>	
-<body class="bg-dark">
-    <div class="limiter">
-		<div class="container-login100">
-			<div class="wrap-login100">
-				<div class="login100-pic js-tilt" data-tilt>
-					<img src="/static/img/logoweb.png" th:src="@{/img/logoweb.png}" alt="IMG">
-				</div>
-                <form class="login100-form validate-form" th:action="@{/addUser}" action="#" method="post" th:object="${user}">
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-					<span class="login100-form-title">
-						¡Registro!
-					</span>
-					
-					<div class="wrap-input100 validate-input" data-validate = "Por favor, ponga su nombre completo.">
-        				<input class="input100" type="text" th:field="*{nombre}" placeholder="Nombre" name="nombre">
-        				<span class="focus-input100"></span>
-							<span class="symbol-input100">
-								<i class="person-square" aria-hidden="true"></i>
-							</span>
-					</div>
-					
-					<div class="wrap-input100 validate-input" data-validate = "Por favor, ponga su nombre completo.">
-        				<input class="input100" type="text" th:field="*{apellidos}" placeholder="Apellidos" name="apellidos">
-        				<span class="focus-input100"></span>
-							<span class="symbol-input100">
-								<i class="person-square" aria-hidden="true"></i>
-							</span>
-					</div>
-					
-					<div class="wrap-input100 validate-input" data-validate = "Email requerido; ej: ejemplo@ejemplo.com">
-        				<input class="input100" type="email" th:field="*{email}" placeholder="Email" name="email">
-        				<span class="focus-input100"></span>
-							<span class="symbol-input100">
-								<i class="fa fa-envelope" aria-hidden="true"></i>
-							</span>
-					</div>
 
-        			<div class="wrap-input100 validate-input" data-validate = "Nombre de usuario requerido; ej: The Infernal Storm">
-        				<input class="input100" type="text" th:field="*{username}" placeholder="Username" name="username">
-        				<span class="focus-input100"></span>
-							<span class="symbol-input100">
-								<i class="bi bi-person-circle" aria-hidden="true"></i>
-							</span>
-					</div>
-        			
+	<link th:href="@{/css/form.css}" href="/static/css/form.css" rel="stylesheet" type="text/css">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<!------ Include the above in your HEAD tag ---------->
 
-            		<div class="wrap-input100 validate-input" data-validate = "Contraseña es requerida">
-        				<input class="input100" type="password" placeholder="Password" th:field="*{password}" name="password">
-       					<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<i class="fa fa-lock" aria-hidden="true"></i>
-						</span>
-        			</div>
+<div class="container register">
+<form class="login100-form validate-form" th:action="@{/addUser}" action="#" method="post" th:object="${user}">
+                <div class="row">
+                    <div class="col-md-3 register-left">
+                        <div class="login100-pic js-tilt" data-tilt>
+						<img src="/static/img/logoweb.png" th:src="@{/img/logoweb.png}" alt="IMG">
+						</div>
+                        <input type="submit" name="" value="Login"/><br/>
+                    </div>
+                    <div class="col-md-9 register-right">
+                        
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            
+                                <h3 class="register-heading">Registro</h3>
+                                
+                                
+                                
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                
+                                <div class="row register-form">
+                                    <div class="col-md-6">
+                                        <div class="form-group" data-validate = "Por favor, ponga su nombre completo.">
+                                            <input type="text" class="form-control" placeholder="Nombre *" th:field="*{nombre}" name="nombre" />
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" th:field="*{email}" placeholder="Email *" name="email" />
+                                        </div>
+                                        
+                                        
+                                        
+                                    </div>
+                                    <div class="col-md-6">
+                                    		
+                                    	<div class="form-group">
+                                            <input type="text" class="form-control" th:field="*{apellidos}" placeholder="Apellidos *" name="apellidos" />
+                                        </div>	
+                                        
+										
+                                        
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" th:field="*{username}" placeholder="Username *" name="username" />
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" th:field="*{password}" placeholder="Password *" name="password" />
+                                        </div>
+                                        
+                                        <input  type="hidden" th:field="*{enabled}" th:value="1"/>
+            							<input name="role" th:value="ROLE_USUARIO" type="hidden"/>
+                                       
+                                    </div>
+                                </div>
+                               </form>
+                            </div>
+                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        	<input  type="hidden" th:field="*{enabled}" th:value="1"/>
-            <input name="role" th:value="ROLE_USUARIO" type="hidden"/>
-
-
-        <div class="container-login100-form-btn">
-			<button class="login100-form-btn">
-				Regístrate
-			</button>
-		</div>
-
-    </form>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    
-	<script src="/static/vendor/jquery/jquery-3.2.1.min.js" th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>
-
-	<script src="/static/vendor/bootstrap/js/popper.js" th:src="@{/vendor/bootstrap/js/popper.js}"></script>
-	<script src="/static/vendor/bootstrap/js/bootstrap.min.js" th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
-	<script src="/static/vendor/select2/select2.min.js" th:src="@{/vendor/select2/select2.min.js}"></script>
-	<script src="/static/vendor/tilt/tilt.jquery.min.js" th:src="@{/vendor/tilt/tilt.jquery.min.js}"></script>
-	<script >
-		$('.js-tilt').tilt({
-			scale: 1.1
-		})
-	</script>
-	<script src="/static/js/main.js" th:src="@{/js/main.js}"></script>
-</body>
+            </div>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--  
-<body>
-	
-	<div class="limiter">
-		<div class="container-login100">
-			<div class="wrap-login100">
-				<div class="login100-pic js-tilt" data-tilt>
-					<img src="/static/images/raichu.png" th:src="@{/images/raichu.png}" alt="IMG">
-				</div>
-
-				<form class="login100-form validate-form" th:action="@{/addUser}" action="#" method="post" th:object="${user}">
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-					<span class="login100-form-title">
-						¡Registro!
-					</span>
-
-					<div class="wrap-input100 validate-input" data-validate = "Nombre de usuario requerido; ej: The Infernal Storm">
-						<input class="input100" type="text" th:field="*{username}" placeholder="Username">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<i class="fa fa-envelope" aria-hidden="true"></i>
-						</span>
-					</div>
-
-					<div class="wrap-input100 validate-input" data-validate = "Contraseña es requerida">
-						<input class="input100" type="password" placeholder="Password" th:field="*{password}">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<i class="fa fa-lock" aria-hidden="true"></i>
-						</span>
-					</div>
-					<input class="datos" type="hidden" th:field="*{enabled}" th:value="1"/>
-					
-					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Regístrate
-						</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	
-	
-
-	
-
-
-
-</body>
-</html> -->

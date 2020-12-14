@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.spring.ultimoquetoque.entity.Juega;
 import com.spring.ultimoquetoque.model.JuegaModel;
 import com.spring.ultimoquetoque.repository.JuegaJpaRepository;
+import com.spring.ultimoquetoque.service.ClasificacionService;
 import com.spring.ultimoquetoque.service.JuegaService;
 
 @Service("juegaServiceImpl")
@@ -22,6 +23,10 @@ public class JuegaServiceImpl implements JuegaService{
 	
 	@Autowired
 	private DozerBeanMapper dozer;
+	
+	@Autowired
+	@Qualifier("clasificacionServiceImpl")
+	private ClasificacionService clasificacionService;
 
 	@Override
 	public List<JuegaModel> listResultados() {
@@ -67,4 +72,5 @@ public class JuegaServiceImpl implements JuegaService{
 	public JuegaModel transform(Juega juega) {
 		return dozer.map(juega, JuegaModel.class);
 	}
+
 }

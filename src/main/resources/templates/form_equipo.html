@@ -26,17 +26,13 @@
 <div class="header">
 	 <div class="container">
 		 <div class="logo">
-			   <h1><a href="index.html">SOCCER</a></h1>
-		 </div>	
+			<a th:href="@{/}"><img class="imagen" src="/static/img/logoweb.png" th:src="@{/img/logoweb.png}" /></a>
+		</div>
 		 <div class="top-menu">
 			 <span class="menu"></span>
 			  <ul>
-				 <li class="active"><a href="index.html">HOME</a></li>
-				 <li><a href="about.html">ABOUT US</a></li>
-				 <li><a href="gallery.html">GALLERY</a></li>
-				 <li><a href="404.html">TRAINING</a></li>
-				 <li><a href="event.html">NEWS & EVENTS</a></li>
-				 <li><a href="contact.html">CONTACT</a></li>
+				 <li class="active"><a th:href="@{/perfil}">PERFIL</a></li>
+				 <li><a th:href="@{/login?logout}">CERRAR SESIÓN</a></li>
 			 </ul>			 
 		 </div>			
 		 <!-- script-for-menu -->
@@ -55,7 +51,7 @@
 <!-- banner -->
 <div class="strip">
 	 <div class="container">
-	 <marquee behavior="scroll" direction="left">Aquí van a ir los últimos resultados</marquee>   
+	 	 
 		<div class="clearfix"></div>
 		</div>
 </div>
@@ -64,39 +60,43 @@ body {font-family: "Lato", sans-serif}
 .mySlides {display: none}
 </style>
 <body>
-
-	<div> Añadir Equipo</div>
 	<form class="form-group" action="#" th:action="@{/addEquipo}" th:object="${equipo}" method="post" enctype="multipart/form-data">
 		<input type="hidden" th:field="*{id}"/>
-		<p>Imagen: <input class="form-control" type="file" name="img"/> </p>
-		<p>Nombre: <input class="form-control" type="text" th:field="*{nombre}" th:value="${nombre}"/> </p>
-		<p> Estadio: <input class="form-control" type="text" th:field="*{estadio}" th:value="${estadio}"/></p>
-		<p> Presidente: <input class="form-control" type="text" th:field="*{presidente}" th:value="${presidente}"/></p>
-		<p> Entrenador: </p>	
+		<hr>
+		<input class="form-control" type="file" name="img"/>
+		<hr>
+		<input class="form-control" type="text" th:field="*{nombre}" th:value="${nombre}" placeholder="Nombre del equipo"/>
+		<h4 th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Error nombre equipo</h4>
+		<hr>
+		<input class="form-control" type="text" th:field="*{estadio}" th:value="${estadio}" placeholder="Estadio"/>
+		<h4 th:if="${#fields.hasErrors('estadio')}" th:errors="*{estadio}">Error estadio equipo</h4>
+		<hr>
+		<input class="form-control" type="text" th:field="*{presidente}" th:value="${presidente}" placeholder="Presidente"/>
+		<h4 class="errores" th:if="${#fields.hasErrors('presidente')}" th:errors="*{presidente}">Error presidente equipo</h4>
+		<hr>
 		<select class="datos"  name="nombreE">
+			<option selected disabled>Seleccione al entrenador del equipo</option>
             <option th:each="e : ${entrenadores}" th:value="${e.nombre}" th:text="${e.nombre}"></option>
         </select>
-		<p> Presupuesto: <input class="form-control" type="number" th:field="*{presupuesto}" th:value="${presupuesto}"/></p>
+        <hr>
+		<p> Presupuesto: <input class="form-control" type="number" th:field="*{presupuesto}" th:value="${presupuesto}" placeholder=""/></p>
+		<hr>
 		<p> Títulos: <input class="form-control" type="number" th:field="*{titulos}" /></p>
-		
-		<p> <input class="form-control" type="submit" value="submit"> </p>
+		<hr>
+		<input class="form-control" type="submit" value="enviar">
 	</form>
 </body>
 <!--footer-->
 <div class="footer">
 	 <div class="container">
 		 <div class="copywrite">
-			 <p>© 2015 All Rights Reseverd Design by <a href="http://w3layouts.com/">W3layouts</a> </p>
+			 <p>© 2020 All Rights Reserved by <a href="https://twitter.com/ernestocalrod7">Ernesto Calvache Rodríguez</a> </p>
 		 </div>
 		 <div class="footer-menu">
 			 <ul>
-				 <li><a href="index.html">HOME</a></li>
-				 <li><a href="index.html">ABOUT US</a></li>
-				 <li><a href="index.html">GALLERY</a></li>
-				 <li><a href="index.html">TRAINING</a></li>
-				 <li><a href="index.html">NEWS & EVENTS</a></li>
-				 <li><a href="index.html">CONTACT</a></li>
-			 </ul>
+				 <li><a th:href="@{/perfil}">PERFIL</a></li>
+				 <li><a th:href="@{/login?logout}">CERRAR SESIÓN</a></li>
+			 </ul>			 
 		 </div>
 		 <div class="clearfix"></div>
 	 </div>

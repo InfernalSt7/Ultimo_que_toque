@@ -29,9 +29,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.ultimoquetoque.constantes.Constantes;
 import com.spring.ultimoquetoque.entity.Jugador;
+import com.spring.ultimoquetoque.model.ClasificacionModel;
 import com.spring.ultimoquetoque.model.EntrenadorModel;
 import com.spring.ultimoquetoque.model.EquipoModel;
 import com.spring.ultimoquetoque.model.JugadorModel;
+import com.spring.ultimoquetoque.model.LigaModel;
 import com.spring.ultimoquetoque.repository.JugadorJpaRepository;
 import com.spring.ultimoquetoque.service.EquipoService;
 import com.spring.ultimoquetoque.service.JugadorService;
@@ -66,23 +68,34 @@ public class JugadorController {
 	/*@PostMapping("/addJugador")
 	public String addJugador(@ModelAttribute("jugador") JugadorModel jugadorModel) {
 		jugadorService.addJugador(jugadorModel);
-		return "redirect:/clasificacion";
+		return "redirect:/clasificacion"; */
 		
-	}*/
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/addJugador")
-    public ModelAndView addJugador(@RequestParam(name="id") int id, @ModelAttribute("imagen") MultipartFile img, @Valid @ModelAttribute("jugadores") JugadorModel jugadorModel, BindingResult result,
+    public ModelAndView addJugador(@RequestParam(name="id") int id, @RequestParam(name="nomEq") String nomEq, @ModelAttribute("imagen") MultipartFile img, 
+    		@Valid @ModelAttribute("jugadores") JugadorModel jugadorModel, BindingResult result,
             RedirectAttributes flash, Model model) {
+		
 			ModelAndView mav = new ModelAndView();
 			
 			// Parsear la fecha para pasar de String a Date //
-			Date date = new Date();
-			SimpleDateFormat objSDF = new SimpleDateFormat("yyyy-MM-dd");
+				Date date = new Date();
+				SimpleDateFormat objSDF = new SimpleDateFormat("yyyy-MM-dd");
 			// ------------------------------------------- //
-			EquipoModel equipoModel = equipoService.filtrarEquipo(id);
+			EquipoModel equipoModel = new EquipoModel();
+			List<EquipoModel> list=equipoService.listEquipos();
 			
-            if (result.hasErrors()) {
+			for(EquipoModel em:list) {
+				if(em.getNombre().equals(nomEq)) {
+					equipoModel=em;
+				}
+				
+			}
+			
+			
+			if (result.hasErrors()) {
             	LOG.info("Result error: " + result);
+            	model.addAttribute("equipos", equipoService.listEquipos());
             	mav.setViewName("redirect:/createJugador");
             }else {
                 if(!img.isEmpty()) {
@@ -101,7 +114,62 @@ public class JugadorController {
                 }else {
                 	jugadorModel.setFoto("/img/mariano.png");
                 }
-                System.out.println(equipoModel.getNombre());
+                jugadorModel.setFecha_nacimiento(objSDF.format(date));
+                jugadorModel.setId_Equipo(equipoModel);
+                jugadorService.addJugador(jugadorModel);
+
+                LOG.info("por aquí no paso");
+                mav.setViewName("redirect:/clasificacion");
+                LOG.info("mav " + mav);
+                //
+            }
+            LOG.info("Después del mav");
+            return mav;
+        } 
+		
+	
+	/*@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PostMapping("/addJugador")
+    public ModelAndView addJugador(@RequestParam(name="id") int id, @RequestParam(name="nomEq") int nomEq, @ModelAttribute("imagen") MultipartFile img, @Valid @ModelAttribute("jugadores") JugadorModel jugadorModel, BindingResult result,
+            RedirectAttributes flash, Model model, EquipoModel equipoModel) {
+			ModelAndView mav = new ModelAndView();
+			
+			// Parsear la fecha para pasar de String a Date //
+			Date date = new Date();
+			SimpleDateFormat objSDF = new SimpleDateFormat("yyyy-MM-dd");
+			// ------------------------------------------- //
+			//EquipoModel equipoModel = equipoService.filtrarEquipo(id);
+			List<EquipoModel> elist = equipoService.listEquipos();
+			
+			for(EquipoModel em:elist) {
+				if(em.getId()==nomEq) {
+					equipoModel=em;
+				}
+				
+			}
+			
+            if (result.hasErrors()) {
+            	LOG.info("Result error: " + result);
+            	model.addAttribute("equipos", equipoService.listEquipos());
+            	mav.setViewName("redirect:/createJugador");
+            }else {
+                if(!img.isEmpty()) {
+                    Path directory=Paths.get(".\\src\\main\\resources\\static\\img");
+                    String ruta=directory.toFile().getAbsolutePath();
+                    LOG.info("ruta"+ruta);
+                    try {
+                        byte[] bytes=img.getBytes();
+                        Path rutaCompleta=Paths.get(ruta+"\\"+jugadorModel.getId()+jugadorModel.getNombre()+".png");
+                        LOG.info("test"+rutaCompleta);
+                        Files.write(rutaCompleta,bytes);
+                        jugadorModel.setFoto("/img/"+jugadorModel.getId() + jugadorModel.getNombre()+".png");
+                    }catch(IOException e) {
+                        e.printStackTrace();
+                    }
+                }else {
+                	jugadorModel.setFoto("/img/mariano.png");
+                }
+
                 jugadorModel.setFecha_nacimiento(objSDF.format(date));
                 jugadorModel.setId_Equipo(equipoModel);
                 jugadorService.addJugador(jugadorModel);
@@ -111,7 +179,7 @@ public class JugadorController {
                 
             }
             return mav;
-        } 
+        }*/
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/formJugador")
@@ -126,13 +194,14 @@ public class JugadorController {
 			}
 		}
 		model.addAttribute("jugador",jugadorModel);
+		model.addAttribute("equipos", equipoService.listEquipos());
 		
 
 		return Constantes.FORMJUGADOR_VIEW;
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@PostMapping("/deletejugador")
+	@GetMapping("/deletejugador")
 	public String deleteJugador(@RequestParam("id") int id) {
 		jugadorService.removeJugador(id);
 		return "redirect:/clasificacion";

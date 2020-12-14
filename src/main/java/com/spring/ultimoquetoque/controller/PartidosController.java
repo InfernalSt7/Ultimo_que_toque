@@ -50,7 +50,6 @@ public class PartidosController {
 	public ModelAndView listPartidos(JuegaModel juegamodel) {
 		ModelAndView mav = new ModelAndView(Constantes.PARTIDOS_VIEW);
 		//mav.addObject("clasificacion",new Clasificacion());
-		LOG.info("Partido:" + juegamodel.getEquipo_local());
 		mav.addObject("resultados", juegaService.listResultados());
 		return mav;
 		
@@ -68,20 +67,5 @@ public class PartidosController {
 		
 	}	
 	
-	@GetMapping("/detailpartidos")
-	public ModelAndView detailPartidos(@RequestParam(name="id") int id) {
-        
-		PartidosModel partidosModel = new PartidosModel();
-		
-		ModelAndView mav = new ModelAndView(Constantes.PARTIDOS_VIEW);
-		for(PartidosModel pm:partidosService.listPartidos()) {
-            if(pm.getId()==id) {
-                partidosModel= pm;
-            }
-        }
-		
-		mav.addObject("pm", partidosModel);	
-		
-		return mav;
 }
-}
+

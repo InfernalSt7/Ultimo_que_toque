@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -26,6 +28,8 @@ public class Equipo {
 	@Column(name="id_equipo")
 	private int id;
 	
+	@NotNull
+	@Size(min = 10, max = 100)
 	@Column(name="nombre")
 	private String nombre;
 	
@@ -38,6 +42,8 @@ public class Equipo {
 	@Column(name="presidente")
 	private String presidente;
 	
+	@NotNull
+	@Size(min = 10, max = 50)
 	@Column(name="estadio")
 	private String estadio;
 	
@@ -72,8 +78,8 @@ public class Equipo {
 	 * @param equipo_local
 	 * @param equipo_visitante
 	 */
-	public Equipo(int id, String nombre, String foto, float presupuesto, String presidente, String estadio, int titulos,
-			Entrenador entrenador, Liga id_liga, Set<Juega> equipo_local, Set<Juega> equipo_visitante) {
+	public Equipo(int id, String nombre, String foto, float presupuesto, String presidente, String estadio, int titulos, Entrenador entrenador,
+			Liga id_liga, Set<Juega> equipo_local, Set<Juega> equipo_visitante) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -248,6 +254,10 @@ public class Equipo {
 	public void setEquipo_visitante(Set<Juega> equipo_visitante) {
 		this.equipo_visitante = equipo_visitante;
 	}
+
+	
+
+	
 
 	
 

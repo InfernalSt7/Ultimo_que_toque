@@ -46,13 +46,19 @@
 <div class="header">
 	 <div class="container">
 		 <div class="logo">
-			<a href="index.html"><img class="imagen" src="/static/img/logoweb.png" th:src="@{/img/logoweb.png}" /></a>
+			<a th:href="@{/}"><img class="imagen" src="/static/img/logoweb.png" th:src="@{/img/logoweb.png}" /></a>
 		</div>
 		 <div class="top-menu">
 			 <span class="menu"></span>
 			  <ul>
 				 <li class="active"><a th:href="@{/perfil}">PERFIL</a></li>
 				 <li><a th:href="@{/login?logout}">CERRAR SESIÓN</a></li>
+				 <li><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/formJugador?id=-1}">
+          				<button class="btn btn-success btn-lg btn-block">
+		 				Añadir jugador
+		  				</button>
+		  			</a>
+		  		</li>
 			 </ul>			 
 		 </div>			
 		 <!-- script-for-menu -->
@@ -71,7 +77,15 @@
 <!-- banner -->
 <div class="strip">
 	 <div class="container">
-	 <marquee behavior="scroll" direction="left"></marquee>   
+	 <marquee behavior="scroll" direction="left">
+	 
+	 	<ul class="resultado" th:each="r : ${resultados}">
+			<li th:text="${r.equipo_local.nombre}"></li>
+			<li th:text="${r.resultado}"></li>
+			<li class="visitante" th:text="${r.equipo_visitante.nombre}"></li>
+		</ul>
+	 
+	 </marquee>    
 		<div class="clearfix"></div>
 		</div>
 </div>
@@ -134,7 +148,7 @@
     </tr>
   </tbody>
 </table>
-<a sec:authorize="hasRole('ROLE_ADMIN')" th:onclick="|confirmEntrenador('/formEntrenador?id=-1')|" class="btn btn-success btn-lg btn-block">
+<a sec:authorize="hasRole('ROLE_ADMIN')" th:onclick="|confirmEntrenador('/createEntrenador')|" class="btn btn-success btn-lg btn-block">
 	<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
   		<path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
 	</svg>
@@ -148,17 +162,13 @@
 <div class="footer">
 	 <div class="container">
 		 <div class="copywrite">
-			 <p>© 2015 All Rights Reseverd Design by <a href="http://w3layouts.com/">W3layouts</a> </p>
+			 <p>© 2020 All Rights Reserved by <a href="https://twitter.com/ernestocalrod7">Ernesto Calvache Rodríguez</a> </p>
 		 </div>
 		 <div class="footer-menu">
 			 <ul>
-				 <li><a href="index.html">HOME</a></li>
-				 <li><a href="index.html">ABOUT US</a></li>
-				 <li><a href="index.html">GALLERY</a></li>
-				 <li><a href="index.html">TRAINING</a></li>
-				 <li><a href="index.html">NEWS & EVENTS</a></li>
-				 <li><a href="index.html">CONTACT</a></li>
-			 </ul>
+				 <li><a th:href="@{/perfil}">PERFIL</a></li>
+				 <li><a th:href="@{/login?logout}">CERRAR SESIÓN</a></li>
+			 </ul>			 
 		 </div>
 		 <div class="clearfix"></div>
 	 </div>

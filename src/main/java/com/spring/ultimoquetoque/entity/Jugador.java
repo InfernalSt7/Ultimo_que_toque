@@ -9,9 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="jugador")
@@ -26,27 +27,34 @@ public class Jugador {
 	@Column(name="foto")
 	private String foto;
 	
+	@NotNull
+	@Size(min = 10, max = 100)
 	@Column(name="nombre")
 	private String nombre;
 	
+	@NotNull
+	@Size(min = 10, max = 100)
 	@Column(name="apellidos")
 	private String apellidos;
 	
+	@NotNull
+	@Size(min = 10, max = 100)
 	@Column(name="pais")
 	private String pais;
 
 	@Column(name="fecha_nacimiento")
 	private String fecha_nacimiento;
 	
+	@Min(value = 1, message="El dorsal tiene que ser superior a 1")
+	@Max(value= 99, message = "El dorsal tiene que ser inferior a 99")
 	@Column(name="dorsal")
 	private int dorsal;
 	
 	@Column(name="posicion")
 	private String posicion;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="ID_Equipo")
-	@OnDelete(action = OnDeleteAction.CASCADE)
+	@ManyToOne(cascade = CascadeType.REFRESH)
+	@JoinColumn(name="id_Equipo")
 	private Equipo id_equipo;
 
 	/**
@@ -60,8 +68,8 @@ public class Jugador {
 	 * @param posicion
 	 * @param id_equipo
 	 */
-	public Jugador(int id, String foto, String nombre, String apellidos, String pais, String fecha_nacimiento,
-			int dorsal, String posicion, Equipo id_equipo) {
+	public Jugador(int id, @NotNull String foto, @NotNull String nombre, @NotNull String apellidos, @NotNull String pais, String fecha_nacimiento,
+			@NotNull int dorsal, String posicion, Equipo id_equipo) {
 		super();
 		this.id = id;
 		this.foto = foto;

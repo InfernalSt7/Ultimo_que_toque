@@ -11,6 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="users")
@@ -27,13 +30,16 @@ public class User {
 	@Column(name="password", nullable=false, length=60)
 	private String password;
 	
+	@Email(message = "El email tiene que ser válido")
 	@Column(name="email")
 	private String email;
 	
-	
+	@NotNull
 	@Column(name="nombre")
 	private String nombre;
 	
+	
+	@NotNull
 	@Column(name="apellidos")
 	private String apellidos;
 	

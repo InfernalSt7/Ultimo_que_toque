@@ -25,8 +25,8 @@
 <div class="header">
 	 <div class="container">
 		 <div class="logo">
-			   <h1><a href="index.html">SOCCER</a></h1>
-		 </div>	
+			<a th:href="@{/}"><img class="imagen" src="/static/img/logoweb.png" th:src="@{/img/logoweb.png}" /></a>
+		</div>
 		 <div class="top-menu">
 			 <span class="menu"></span>
 			  <ul>
@@ -50,7 +50,7 @@
 <!-- banner -->
 <div class="strip">
 	 <div class="container">
-	 <marquee behavior="scroll" direction="left">Aquí van a ir los últimos resultados</marquee>   
+	 
 		</div>
 </div>
 <section class="breadcrumb-section set-bg" data-setbg="">
@@ -58,7 +58,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="bs-text">
-                        <h2>Resultados</h2>
+                        <h2>Últimos Resultados</h2>
                     </div>
                 </div>
             </div>
@@ -110,17 +110,13 @@
 <div class="footer">
 	 <div class="container">
 		 <div class="copywrite">
-			 <p>© 2015 All Rights Reseverd Design by <a href="http://w3layouts.com/">W3layouts</a> </p>
+			 <p>© 2020 All Rights Reserved by <a href="https://twitter.com/ernestocalrod7">Ernesto Calvache Rodríguez</a> </p>
 		 </div>
 		 <div class="footer-menu">
 			 <ul>
-				 <li><a href="index.html">HOME</a></li>
-				 <li><a href="index.html">ABOUT US</a></li>
-				 <li><a href="index.html">GALLERY</a></li>
-				 <li><a href="index.html">TRAINING</a></li>
-				 <li><a href="index.html">NEWS & EVENTS</a></li>
-				 <li><a href="index.html">CONTACT</a></li>
-			 </ul>
+				 <li><a th:href="@{/perfil}">PERFIL</a></li>
+				 <li><a th:href="@{/login?logout}">CERRAR SESIÓN</a></li>
+			 </ul>			 
 		 </div>
 		 <div class="clearfix"></div>
 	 </div>

@@ -1,7 +1,5 @@
 package com.spring.ultimoquetoque.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.ultimoquetoque.constantes.Constantes;
+import com.spring.ultimoquetoque.entity.Entrenador;
 import com.spring.ultimoquetoque.model.EntrenadorModel;
 import com.spring.ultimoquetoque.repository.EntrenadorJpaRepository;
 import com.spring.ultimoquetoque.service.EntrenadorService;
@@ -40,28 +39,39 @@ public class EntrenadorController {
 		return mav;
 	}
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@PostMapping("/addEntrenador")
-	public String addEntrenador(@ModelAttribute("entrenador") EntrenadorModel entrenadorModel) {
+	@PostMapping("/anadirEntrenador")
+	public String anadirEntrenador(@ModelAttribute("entrenador") EntrenadorModel entrenadorModel) {
 		entrenadorService.addEntrenador(entrenadorModel);
 		return "redirect:/formEquipo?id=-1";
 		
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@GetMapping("/formEntrenador")
-	public String formEntrenador(@RequestParam(name="id") int id, Model model){
-		EntrenadorModel entrenadorModel=new EntrenadorModel();
-		if(id!=-1) {
-			List<EntrenadorModel> list=entrenadorService.listEntrenadores();
-			for(EntrenadorModel em:list) {
-				if(em.getId()==id) {
-					entrenadorModel=em;
-				}
-			}
-			
+	@PostMapping("/updateEntrenador")
+	public String updateEntrenador(@ModelAttribute("entrenador") EntrenadorModel entrenadorModel) {
+		entrenadorService.addEntrenador(entrenadorModel);
+		return "redirect:/clasificacion";
+		
+	}
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@GetMapping("/createEntrenador")
+	public ModelAndView createEntrenador(){
+		ModelAndView mav = new ModelAndView(Constantes.FORMENTRENADOR_VIEW);
+		mav.addObject("entrenador", new Entrenador());
+		return mav;
+	}
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@GetMapping("/editEntrenador")
+	public ModelAndView editEntrenador(@RequestParam(name="id") int id, Model model){
+		ModelAndView mav = new ModelAndView(Constantes.UPDATEENTRENADOR_VIEW);
+		if (id ==0) {
+			mav.addObject("entrenador", new EntrenadorModel());
+		} else {
+			mav.addObject("entrenador", entrenadorService.updateEntrenador(id));
 		}
-		model.addAttribute("entrenador",entrenadorModel);
-		return Constantes.FORMENTRENADOR_VIEW;
+		return mav;
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")

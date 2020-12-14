@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.spring.ultimoquetoque.constantes.Constantes;
 import com.spring.ultimoquetoque.model.EquipoModel;
 import com.spring.ultimoquetoque.model.UserModel;
+import com.spring.ultimoquetoque.service.JuegaService;
 import com.spring.ultimoquetoque.service.UserService;
 
 @Controller
@@ -24,17 +25,22 @@ public class UserController {
 	@Qualifier("userServiceImpl")
 	private UserService userService;
 	
+	@Autowired
+	@Qualifier("juegaServiceImpl")
+	private JuegaService juegaService;
+	
 	@GetMapping("/listUsers")
 	public ModelAndView listUsers() {
 		ModelAndView mav = new ModelAndView(Constantes.USER_VIEW);
 		mav.addObject("users", userService.listUsers());
+		mav.addObject("resultados",juegaService.listResultados());
 		return mav;
 	}	
 	
 	@GetMapping("/deleteUser")
 	public String deleteUser(@RequestParam("id") int id) {
 		userService.deleteUser(id);
-		return "redirect:/perfil";
+		return "redirect:/registro";
 	}
 	
 	@GetMapping("/updateUser")

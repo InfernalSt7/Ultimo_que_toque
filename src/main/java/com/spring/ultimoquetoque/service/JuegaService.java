@@ -14,4 +14,5 @@ public interface JuegaService {
 	public abstract JuegaModel detailResultados(int id);
 	public abstract Juega transform(JuegaModel juegaModel);
 	public abstract JuegaModel transform(Juega juega);
+
 }

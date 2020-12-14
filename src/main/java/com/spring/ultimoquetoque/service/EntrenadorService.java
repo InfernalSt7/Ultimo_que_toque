@@ -12,7 +12,7 @@ public interface EntrenadorService {
 	public abstract List<EntrenadorModel> listEntrenadores();
 	public abstract EntrenadorModel addEntrenador(EntrenadorModel entrenadorModel);
 	public abstract int removeEntrenador(int id);
-	public abstract EntrenadorModel updateEntrenador(EntrenadorModel entrenadorModel);
+	public abstract EntrenadorModel updateEntrenador(int id);
 	public abstract Entrenador transform(EntrenadorModel entrenadorModel);
 	public abstract EntrenadorModel transform(Entrenador entrenador);
 }

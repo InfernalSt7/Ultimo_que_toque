@@ -47,7 +47,8 @@ public class ClasificacionController {
 	@GetMapping("/clasificacion")
 	public ModelAndView listClasificacion() {
 		ModelAndView mav = new ModelAndView(Constantes.CLASIFICACION_VIEW);
-		//mav.addObject("clasificacion",new Clasificacion());		
+		//mav.addObject("clasificacion",new Clasificacion());
+		mav.addObject("resultados",juegaService.listResultados());
 		mav.addObject("clasificaciones", clasificacionService.listClasificacion());
 		return mav;
 	}

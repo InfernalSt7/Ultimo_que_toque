@@ -1,4 +1,4 @@
-A<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -22,13 +22,24 @@ A<!DOCTYPE html>
 	<!-- js -->
 <link href="/static/css/perfil/perfil.css" th:href="@{/css/perfil/perfil.css}" rel="stylesheet" type="text/css" media="all" />
 </head>
+<script>
+	function confirmDelete(ruta){
+	    $('#confirmDelete').modal();
+	    $("#aceptar").val(ruta);
+	}
+	
+	function confirmar(){
+	    var ruta = $("#aceptar").val();
+	    window.location = ruta;
+	}
+</script>
 <body>
 <!-- header -->
 <div class="header">
 	 <div class="container">
 		 <div class="logo">
-			   <h1><a href="index.html">SOCCER</a></h1>
-		 </div>	
+			<a th:href="@{/}"><img class="imagen" src="/static/img/logoweb.png" th:src="@{/img/logoweb.png}" /></a>
+		</div>
 		 <div class="top-menu">
 			 <span class="menu"></span>
 			  <ul>
@@ -52,7 +63,13 @@ A<!DOCTYPE html>
 <!-- banner -->
 <div class="strip">
 	 <div class="container">
-	 <marquee behavior="scroll" direction="left">Aquí van a ir los últimos resultados</marquee>   
+	 <marquee behavior="scroll" direction="left">
+		<ul class="resultado" th:each="r : ${resultados}">
+			<li th:text="${r.equipo_local.nombre}"></li>
+			<li th:text="${r.resultado}"></li>
+			<li class="visitante" th:text="${r.equipo_visitante.nombre}"></li>
+		</ul>
+	 </marquee>   
 		</div>
 </div>
 <!-- banner -->
@@ -72,7 +89,7 @@ A<!DOCTYPE html>
                     <hr>
                       <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-primary" th:href="@{/listUsers}">Ver usuarios registrados</a>
                       <a class="btn btn-warning" th:href="@{/updateUser(id=${u.id})}">Editar</a>
-                      <button class="btn btn-danger">Eliminar</button>
+                      <a th:onclick="|confirmDelete('/deleteUser?id=${u.id}')|" class="btn btn-danger">Eliminar</a>
                     </div>
                   </div>
                 </div>
@@ -118,21 +135,37 @@ A<!DOCTYPE html>
 <div class="footer">
 	 <div class="container">
 		 <div class="copywrite">
-			 <p>© 2015 All Rights Reseverd Design by <a href="http://w3layouts.com/">W3layouts</a> </p>
+			 <p>© 2020 All Rights Reserved by <a href="https://twitter.com/ernestocalrod7">Ernesto Calvache Rodríguez</a> </p>
 		 </div>
 		 <div class="footer-menu">
 			 <ul>
-				 <li><a href="index.html">HOME</a></li>
-				 <li><a href="index.html">ABOUT US</a></li>
-				 <li><a href="index.html">GALLERY</a></li>
-				 <li><a href="index.html">TRAINING</a></li>
-				 <li><a href="index.html">NEWS & EVENTS</a></li>
-				 <li><a href="index.html">CONTACT</a></li>
-			 </ul>
+				 <li><a th:href="@{/perfil}">PERFIL</a></li>
+				 <li><a th:href="@{/login?logout}">CERRAR SESIÓN</a></li>
+			 </ul>			 
 		 </div>
 		 <div class="clearfix"></div>
 	 </div>
 </div>
 <!-- //footer -->
+<!-- Modal Eliminar -->
+<div class="modal align-self-center" tabindex="-1" id="confirmDelete">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title text-danger text-justify">¿Estás seguro de eliminar tu usuario?</h5>
+              </div>
+              <div class="modal-body text-justify">
+                <p>Esta acción no se podrá deshacer</p>
+              </div>
+              <div class="modal-footer text-center col">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-outline-danger" id="aceptar" onclick="confirmar()">Eliminar</button>
+              </div>
+            </div>
+          </div>
+</div>
+<!-- //Modal Eliminar -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </body>
 </html>

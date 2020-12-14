@@ -22,12 +22,23 @@
 		<script src="/static/js/index/jquery.min.js" th:src="@{/js/index/jquery.min.js}"></script>
 	<!-- js -->
 </head>
+<script>
+	function confirmDelete(ruta){
+	    $('#confirmDelete').modal();
+	    $("#aceptar").val(ruta);
+	}
+	
+	function confirmar(){
+	    var ruta = $("#aceptar").val();
+	    window.location = ruta;
+	}
+</script>
 <body>
 <!-- header -->
 <div class="header">
 	 <div class="container">
 		 <div class="logo">
-			<a href="index.html"><img class="imagen" src="/static/img/logoweb.png" th:src="@{/img/logoweb.png}" /></a>
+			<a th:href="@{/}"><img class="imagen" src="/static/img/logoweb.png" th:src="@{/img/logoweb.png}" /></a>
 		</div>
 		 <div class="top-menu">
 			 <span class="menu"></span>
@@ -82,12 +93,11 @@
                   	</p>
                   	<p th:text="${jugador.posicion}"></p>
                   </div>
-                  
-                  
-                  
+
                   <div class="catagory" th:text="${jugador.dorsal}"></div>
                   <div class="views" th:text="${jugador.fecha_nacimiento}"></div>
-                  <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/formJugador(id=${jugador.id})}">
+                               
+				<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/formJugador(id=${jugador.id})}">
                   	<button class="btn btn-warning btn-lg btn-block">
                   		<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   			<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -97,28 +107,20 @@
                   </a>
                   <br>
                  
-                  <form sec:authorize="hasRole('ROLE_ADMIN')" action="#" method="post" th:action="@{/deletejugador(id=${jugador.id})}">
-                  	<button class="btn btn-danger btn-lg btn-block">
+                 
+                  	<a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-danger btn-lg btn-block" th:onclick="|confirmDelete('/deletejugador?id=${jugador.id}')|">
                   		<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
   							<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
   							<path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
 						</svg>
-                  	</button>
-                  </form>                
-
-                
+                  	</a>
               </div>
+              
             </div>
              
           </div> <!-- Cierre Card -->
           
-         <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/formJugador?id=-1}">
-          	<button class="btn btn-success btn-lg btn-block">
-		 		<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  					<path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
-				</svg>
-		  	</button>
-		  </a>
+         
 		 </div>
 	 </div>
 	 
@@ -130,21 +132,37 @@
 <div class="footer">
 	 <div class="container">
 		 <div class="copywrite">
-			 <p>© 2015 All Rights Reseverd Design by <a href="http://w3layouts.com/">W3layouts</a> </p>
+			 <p>© 2020 All Rights Reserved by <a href="https://twitter.com/ernestocalrod7">Ernesto Calvache Rodríguez</a> </p>
 		 </div>
 		 <div class="footer-menu">
 			 <ul>
-				 <li><a href="index.html">HOME</a></li>
-				 <li><a href="index.html">ABOUT US</a></li>
-				 <li><a href="index.html">GALLERY</a></li>
-				 <li><a href="index.html">TRAINING</a></li>
-				 <li><a href="index.html">NEWS & EVENTS</a></li>
-				 <li><a href="index.html">CONTACT</a></li>
-			 </ul>
+				 <li><a th:href="@{/perfil}">PERFIL</a></li>
+				 <li><a th:href="@{/login?logout}">CERRAR SESIÓN</a></li>
+			 </ul>			 
 		 </div>
 		 <div class="clearfix"></div>
 	 </div>
 </div>
 <!-- //footer -->
+<!-- Modal Eliminar -->
+<div class="modal align-self-center" tabindex="-1" id="confirmDelete">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title text-danger text-justify">¿Estás seguro de eliminar el jugador?</h5>
+              </div>
+              <div class="modal-body text-justify">
+                <p>Esta acción no se podrá deshacer</p>
+              </div>
+              <div class="modal-footer text-center col">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-outline-danger" id="aceptar" onclick="confirmar()">Eliminar</button>
+              </div>
+            </div>
+          </div>
+</div>
+<!-- //Modal Eliminar -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </body>
 </html>

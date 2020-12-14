@@ -35,6 +35,7 @@ import com.spring.ultimoquetoque.model.LigaModel;
 import com.spring.ultimoquetoque.service.ClasificacionService;
 import com.spring.ultimoquetoque.service.EntrenadorService;
 import com.spring.ultimoquetoque.service.EquipoService;
+import com.spring.ultimoquetoque.service.JuegaService;
 import com.spring.ultimoquetoque.service.JugadorService;
 import com.spring.ultimoquetoque.service.LigaService;
 
@@ -64,8 +65,7 @@ public class EquipoController {
 	@Autowired
 	@Qualifier("jugadorServiceImpl")
 	private JugadorService jugadorService;
-	
-	
+
 	
 	@GetMapping("/listEquipos")
 	public ModelAndView listEquipos() {
@@ -78,12 +78,16 @@ public class EquipoController {
 	@PostMapping("/addEquipo")
     public ModelAndView addEquipo(@RequestParam(name="nombreE") String nombreE, @ModelAttribute("imagen") MultipartFile img, @Valid @ModelAttribute("equipos") EquipoModel equipoModel, BindingResult result,
             RedirectAttributes flash, Model model) {
+		
 			ModelAndView mav = new ModelAndView();
+			
 			EntrenadorModel entrenadorModel= new EntrenadorModel();
-			LigaModel ligaModel = new LigaModel();
 			List<EntrenadorModel> list=entrenadorService.listEntrenadores();
+			
+			LigaModel ligaModel = new LigaModel();
 			List <LigaModel> listL = ligaService.listLigas();
 			LOG.info("entrenador" + entrenadorService.listEntrenadores().get(0).getNombre());
+			
 			for(EntrenadorModel em:list) {
 				if(em.getNombre().equals(nombreE)) {
 					entrenadorModel=em;
@@ -99,7 +103,7 @@ public class EquipoController {
 			
             if (result.hasErrors()) {
             	model.addAttribute("entrenadores", entrenadorService.listEntrenadores());
-            	mav.setViewName("redirect:/clasificacion/create");
+            	mav.setViewName("redirect:/formEquipo?id=-1");
             }else {
                 if(!img.isEmpty()) {
                     Path directory=Paths.get(".\\src\\main\\resources\\static\\img");
@@ -119,6 +123,7 @@ public class EquipoController {
                 	equipoModel.setFoto("/img/real_madrid.png");
                     LOG.info("/images/0Pikachu.png");
                 }
+                
                 equipoModel.setId_liga(ligaModel);
                 equipoModel.setEntrenador(entrenadorModel);
                 LOG.info("Campos: " + equipoModel.getEstadio()+ " " + equipoModel.getFoto() + " " + equipoModel.getNombre() + equipoModel.getPresidente() + equipoModel.getPresupuesto() + equipoModel.getTitulos() + equipoModel.getEntrenador().getNombre() + equipoModel.getId_liga().getNombre());

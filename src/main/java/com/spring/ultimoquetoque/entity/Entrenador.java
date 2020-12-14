@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="entrenador")
@@ -17,12 +19,15 @@ public class Entrenador {
 	@Column(name="ID_Entrenador")
 	private int id;
 	
+	@NotNull
 	@Column(name="nombre")
 	private String nombre;
 	
+	@NotNull
 	@Column(name="apellidos")
 	private String apellidos;
 	
+	@NotNull
 	@Column(name="pais")
 	private String pais;
 	
@@ -40,7 +45,7 @@ public class Entrenador {
 	 * @param fecha_nacimiento
 	 * @param equipo
 	 */
-	public Entrenador(int id, String nombre, String apellidos, String pais, String fecha_nacimiento, Equipo equipo) {
+	public Entrenador(int id, @NotNull String nombre, @NotNull String apellidos, @NotNull String pais, String fecha_nacimiento, Equipo equipo) {
 		super();
 		this.id = id;
 		this.nombre = nombre;

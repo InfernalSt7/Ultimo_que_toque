@@ -50,8 +50,8 @@ public class EntrenadorServiceImpl implements EntrenadorService{
 
  
 	@Override
-	public EntrenadorModel updateEntrenador(EntrenadorModel entrenadorModel) {
-		Entrenador entrenador=transform(entrenadorModel);
+	public EntrenadorModel updateEntrenador(int id) {	
+        Entrenador entrenador= entrenadorJpaRepository.findById(id);
 	    return transform(entrenadorJpaRepository.save(entrenador));
 	}
 

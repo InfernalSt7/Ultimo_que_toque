@@ -22,15 +22,15 @@ public class Juega {
 	@Column(name="resultado")
 	private String resultado;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "equipo_local")
 	private Equipo equipo_local;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "equipo_visitante")
 	private Equipo equipo_visitante;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name="ID_Partido")
 	private Partidos fk_partido;
 

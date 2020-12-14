@@ -25,7 +25,7 @@
 <div class="header">
 	 <div class="container">
 	 <div class="logo">
-		<a href="index.html"><img class="imagen" src="/static/img/logoweb.png" th:src="@{/img/logoweb.png}" /></a>
+		<a th:href="@{/}"><img class="imagen" src="/static/img/logoweb.png" th:src="@{/img/logoweb.png}" /></a>
 	</div>
 		 <div class="top-menu">
 			 <span class="menu"></span>
@@ -103,14 +103,17 @@
 				 <p>¡Acceda a los últimos resultados y a las próximas jornadas de la Liga Santander!</p>
 				 <a th:href="@{/resultados}">Leer más...</a>
 			 </div>
-			 <div class="col-md-2 content-grid1">
-				 
-			 </div>
 			<div class="col-md-2 content-grid1">
 				 <img src="/static/img/index/liga.jpg" th:src="@{/img/index/liga.jpg}" alt=""/>
 				 <h3>Clasificación</h3>
 				 <p>¡Acceda a la clasificación de la Liga Santander 2020/2021!</p>
 				 <a th:href="@{/clasificacion}">Leer más...</a>
+			 </div>
+			 <div class="col-md-4 content-grid1">
+				 <img src="/static/img/index/resultado.png" th:src="@{/img/index/cadizaficion.jpg}" alt=""/>
+				 <h3>Foros</h3>
+				 <p>¡Acceda a los últimos foros de la comunidad!</p>
+				 <a href="#">Leer más...</a>
 			 </div>
 			 <div class="clearfix"></div>
 		 </div>

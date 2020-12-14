@@ -26,17 +26,13 @@
 <div class="header">
 	 <div class="container">
 		 <div class="logo">
-			   <h1><a href="index.html">SOCCER</a></h1>
-		 </div>	
+			<a th:href="@{/}"><img class="imagen" src="/static/img/logoweb.png" th:src="@{/img/logoweb.png}" /></a>
+		</div>
 		 <div class="top-menu">
 			 <span class="menu"></span>
 			  <ul>
-				 <li class="active"><a href="index.html">HOME</a></li>
-				 <li><a href="about.html">ABOUT US</a></li>
-				 <li><a href="gallery.html">GALLERY</a></li>
-				 <li><a href="404.html">TRAINING</a></li>
-				 <li><a href="event.html">NEWS & EVENTS</a></li>
-				 <li><a href="contact.html">CONTACT</a></li>
+				 <li class="active"><a th:href="@{/perfil}">PERFIL</a></li>
+				 <li><a th:href="@{/login?logout}">CERRAR SESIÓN</a></li>
 			 </ul>			 
 		 </div>			
 		 <!-- script-for-menu -->
@@ -55,7 +51,7 @@
 <!-- banner -->
 <div class="strip">
 	 <div class="container">
-	 <marquee behavior="scroll" direction="left">Aquí van a ir los últimos resultados</marquee>   
+	 
 		<div class="clearfix"></div>
 		</div>
 </div>
@@ -66,41 +62,46 @@ body {font-family: "Lato", sans-serif}
 <body>
 
 	<form th:action="@{/addUser}" action="#" method="post" th:object="${user}" enctype="multipart/form-data">
+	
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		
 		<input type="hidden" th:field="*{id}"/>
-		<p>Nombre: <input class="form-control" type="text" th:field="*{nombre}" th:value="${nombre}"/> </p>
-		<p> Apellidos: <input class="form-control" type="text" th:field="*{apellidos}" th:value="${apellidos}"/></p>
-		<p> Email: <input class="form-control" type="text" th:field="*{email}" th:value="${email}"/></p>
-		<p> Nombre de Usuario: <input class="form-control" type="text" th:field="*{username}" th:value="${username}"/></p>
-		<p> Contraseña: <input class="form-control" type="password" th:field="*{password}" th:value="${password}"/></p>
-		<input  type="hidden" th:field="*{enabled}" th:value="1"/> 
+		<hr>
+		<input class="form-control" type="text" th:field="*{nombre}" th:value="${nombre}" placeholder="Nombre"/>
+		<hr>
+		<input class="form-control" type="text" th:field="*{apellidos}" th:value="${apellidos}" placeholder="Apellidos"/>
+		<hr>
+		<input class="form-control" type="text" th:field="*{email}" th:value="${email}" placeholder="Email"/>
+		<hr>
+		<input class="form-control" type="text" th:field="*{username}" th:value="${username}" placeholder="Username"/>
+		<hr>
+		<input class="form-control" type="password" th:field="*{password}" th:value="${password}" placeholder="Password"/>
+		<hr>
+		<input  type="hidden" th:field="*{enabled}" th:value="1"/>
 		<input sec:authorize="hasRole('ROLE_USUARIO')" type="hidden" th:value="ROLE_USUARIO" name="role"/>
+
 		<input sec:authorize="hasRole('ROLE_MOD')" type="hidden" th:value="ROLE_MOD" name="role"/>
-        <label sec:authorize="hasRole('ROLE_ADMIN')">Rol: </label>
+		<hr>
          <select class="form-control" name="role" sec:authorize="hasRole('ROLE_ADMIN')">
+         	<option selected disabled>Asigne el rol al usuario</option>
             <option th:value="ROLE_USUARIO">USUARIO</option>
             <option th:value="ROLE_ADMIN">ADMIN</option>
             <option th:value="ROLE_MOD">MOD</option>
         </select>
-		
-		<p> <input class="form-control" type="submit" value="submit"> </p>
+		<input class="form-control" type="submit" value="enviar">
 	</form>
 </body>
 <!--footer-->
 <div class="footer">
 	 <div class="container">
 		 <div class="copywrite">
-			 <p>© 2015 All Rights Reseverd Design by <a href="http://w3layouts.com/">W3layouts</a> </p>
+			 <p>© 2020 All Rights Reserved by <a href="https://twitter.com/ernestocalrod7">Ernesto Calvache Rodríguez</a> </p>
 		 </div>
 		 <div class="footer-menu">
 			 <ul>
-				 <li><a href="index.html">HOME</a></li>
-				 <li><a href="index.html">ABOUT US</a></li>
-				 <li><a href="index.html">GALLERY</a></li>
-				 <li><a href="index.html">TRAINING</a></li>
-				 <li><a href="index.html">NEWS & EVENTS</a></li>
-				 <li><a href="index.html">CONTACT</a></li>
-			 </ul>
+				 <li><a th:href="@{/perfil}">PERFIL</a></li>
+				 <li><a th:href="@{/login?logout}">CERRAR SESIÓN</a></li>
+			 </ul>			 
 		 </div>
 		 <div class="clearfix"></div>
 	 </div>
